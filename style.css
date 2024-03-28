@@ -48,6 +48,24 @@ header {
 }
 
 
+.container {
+    padding-top: 20px;
+    background-color: white;
+}
+
+.member {
+    border: 2px solid rgb(112, 135, 220);
+    margin: 20px;
+}
+
+.member > * {
+    margin: 20px;
+}
+
+.member > image {
+    height: 50px;
+    width: 50px;
+}
 
 
 
