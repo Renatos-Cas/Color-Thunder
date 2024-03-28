@@ -1,0 +1,307 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('../src/background.jpg');
+    background-size: cover;
+    background-position: center;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0); 
+}
+
+
+.header-title {
+    font-size: 40px; 
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.header-logo {
+    padding-top: 5px;
+    padding-bottom: 0;
+    width: 100px; 
+}
+
+.controlled-medication {
+    color: red;
+}
+
+.header-title {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 25px; 
+    font-weight: bold;
+    color: #fff;
+}
+
+
+
+
+
+.header-icons i {
+    margin: 0 10px;
+    font-size: 20px;
+}
+
+.header-nav {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.header-nav a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background: #fff; 
+    flex: 1;
+}
+
+main {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding-left: 100px;
+    padding-top: 20px;
+}
+main p{
+    font-size: 20px;
+    max-width: 100ch;  
+    word-wrap: break-word;  
+}
+.sidebar {
+    
+    width: 15%;
+    height: 10;
+    padding: 30px;
+    margin-top: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background: #fff;  
+}
+.sidebar h3 {
+    font-size: 24px;
+}
+.sidebar a{
+    color: blue;
+}
+.search-section {
+    text-align: center;
+    width: 20%;
+    padding: 30px;
+    margin-top: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background: #fff;  
+}
+.search-section input{
+    height: 30px;
+    width: 100%;
+}
+.search-section button {
+    margin-top: 20px;
+    background-color: blue;  
+    color: white;  
+    padding: 10px 20px;  
+    font-size: 16px;  
+    border: none;  
+    border-radius: 5px;  
+    cursor: pointer;  
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);  
+    transition: background-color 0.3s ease;  
+}
+
+ 
+.search-section button:hover {
+    background-color: darkblue;  
+}
+
+.search-section button:active {
+    background-color: navy;  
+}
+
+footer {
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    background: #fff;  
+    margin-top: auto;  
+}
+
+.footer-text {
+    font-size: 12px;  
+}
+
+a:hover {
+    text-decoration: underline;  
+    color: orange;  
+}
+
+body,
+html {
+    height: 100%;
+    margin: 0;
+    background-color: #fff;  
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    margin: auto;  
+}
+
+.search-bar,
+.patients-list {
+    width: 100%;
+    
+    padding: 15px;
+    padding-left: 100px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);  
+    background-color: #fff;  
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table,
+th,
+td {
+    border: 1px solid #ddd;  
+}
+
+th,
+td {
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    background-color: #f2f2f2;  
+}
+
+ 
+
+ 
+
+
+
+
+
+
+@media (max-width: 768px) {
+    body, html {
+        padding: 0;
+        margin: 0;
+    }
+
+    header, .header-top, .header-nav, .header-icons, .content-wrapper, main, .sidebar, .search-section, footer, .content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+    }
+    .header-icons i, .some-other-icon-container i {
+        display: none;  
+    }
+
+
+    .header-logo, .header-title, .header-nav a, main, .sidebar, .search-section, footer {
+        text-align: center;
+    }
+
+    .header-nav {
+        display: none;
+        justify-content: center;
+    }
+
+    .header-nav a {
+        display: block;
+        width: auto;
+        margin-bottom: 10px;  
+    }
+
+    .content-wrapper, main, .sidebar, .search-section {
+        padding: 10px;  
+    }
+
+    main, .sidebar, .search-section {
+        box-shadow: none;  
+    }
+
+    .search-section input, .search-section button {
+        width: 90%;  
+        margin: 10px auto;  
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;  
+    }
+
+    table, th, td {
+        width: auto;  
+        display: block;  
+        text-align: center;  
+    }
+
+    th, td {
+        padding: 8px;  
+        border: 1px solid #ddd;  
+    }
+
+     
+    img {
+        max-width: 100%;  
+        height: auto;  
+    }
+
+     
+    .any-other-class {
+        align-content: center;
+        padding: 0 0;  
+        margin: 0 0;  
+        flex-direction: column;  
+        padding: 10px 0;  
+    }
+    main > * {
+        align-content: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;  
+        width: 100%;  
+        padding: 0 !important;  
+        margin: 0 !important;  
+    }
+    main .some-class {
+        display: flex;
+        flex-direction: column;
+        align-items: center;  
+        width: 100%;  
+        padding: 0 !important;  
+        margin: 0 !important;  
+    }
+}
+
