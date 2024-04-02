@@ -29,7 +29,7 @@ header{
     position: fixed;
     top: 120px; 
     width: 100%;
-    height: 40px;
+    height: 30px;
     background: linear-gradient(to bottom, #05445e 100%, #E8F8F8 100%);
     z-index: 5;
   }
@@ -40,12 +40,11 @@ header{
 
 .logo {
     z-index: 6;
-    width: 120px; 
-    height: 200px;
     top: 0;
     left: 0;
     position: fixed;
-    height: 20%;
+    height: 18%;
+    width: auto; 
 }
 
 .header-title {
@@ -57,6 +56,7 @@ header{
 }
 
 .container {
+    height: 100%;
     margin-top: 180px;
     background-color: #E8F8F8;
 }
@@ -80,9 +80,7 @@ header{
     margin: 0 10px;
     font-size: 20px;
 }
-.member-info {
-    transition: opacity 0.3s ease; 
-}
+
 
 .header-nav {
     display: flex;
@@ -91,26 +89,28 @@ header{
     width: 100%;
     background-color: #05445e;
     height: 40px;
+   
     
 }
 
 .header-nav a {
-    
+    z-index: 11;
     padding-bottom: 100px;
     margin: 0 10px;
     text-decoration: none;
     color: white;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 15px;
     background-color: #0f76a2;
     padding: 10px 20px;
-    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease 0s;
+    margin-top: 20px;
+    margin-bottom: 10px;
 }
 
 .header-nav a:hover {
     background-color: #09222F;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.10);
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.30);
 }
 
 .header-nav a.active {
@@ -126,11 +126,7 @@ header{
     flex: 1;
 }
 
-main {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding-left: 100px;
-    padding-top: 20px;
-}
+
 main p{
     font-size: 20px;
     max-width: 100ch;  
@@ -143,7 +139,7 @@ footer {
     width: 100%;
     text-align: center;
     background-color: #05445e; 
-    position: relative; /* Change this to 'fixed' if you want the footer to be always visible at the bottom */
+    position: relative; 
     bottom: 0;
   }
 
@@ -165,36 +161,9 @@ a:hover {
     margin: auto;  
 }
 
-.search-bar,
-.patients-list {
-    width: 100%;
-    
-    padding: 15px;
-    padding-left: 100px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);  
-    background-color: #fff;  
-}
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
 
-table,
-th,
-td {
-    border: 1px solid #ddd;  
-}
 
-th,
-td {
-    text-align: left;
-    padding: 8px;
-}
-
-th {
-    background-color: #f2f2f2;  
-}
 
 
 
