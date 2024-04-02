@@ -4,24 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About</title>
-    <link rel="stylesheet" href="style_about.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+<script src="./src/javascript/fade_element_effect.js" defer></script>
     <header>
-        <div class="header-top">
-            <div class="header-title">~About Color Thunder~</div>
-        </div>
-        <nav class="header-nav">
-            <a href="home.html">Homepage</a>
-            <a href = "color-coordination.html">Color Coordinate Generation</a> <!--!color cordinate generation tab-->
-            <a class="active" href="about.html">About</a> <!--about tab-->
-        </nav>
-    </header>
+            <div class="header-top">
+                <div class="header-title">~About Color Thunder~</div>
+            </div>
+            <?php include './header.html'; ?>
+        </header>
 
     <div class="container">
 
-        <img src="src/logo.png" alt="Logo" class="logo">
+        
 
         <div class="mission">
             <h3>Our Mission</h3>
@@ -41,6 +37,7 @@
         </div>
 
         <div class="member-info">
+           
             <div class="blue-square">
                 <h2> Meet </h2>
                 <h1> Rene Castillo </h1>
@@ -129,6 +126,6 @@
         
     </div>
     <footer>
-        <p>&copy; Made by CS312 Students.</p>
+        <?php include './footer.html'; ?>
     </footer>
 </body>
