@@ -20,7 +20,6 @@
         
 
         <div class="mission">
-            <h3>Our Mission</h3>
             <h2>Why a Color Coordinate Generator Matters</h2>
             <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 
                 labore et dolore magna aliqua. Sollicitudin nibh sit amet commodo nulla facilisi. Augue lacus
