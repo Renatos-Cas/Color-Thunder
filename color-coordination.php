@@ -8,25 +8,30 @@
 </head>
 <body>
 <header>
-        <div class="header-top">
-            <div class="header-title">~Color Coordination Generator~</div>
-        </div>
-        <?php include './header.html'; ?>
-    </header>
-    <main>
-    <div class = "container"> 
-                <form id="coordinationForm">
-                <label for="numRowsAndCols">Number of rows and columns:</label>
-                <input id="numRowsAndCols" placeholder="Enter number of rows and columns" type="number" min="1" max="26" required>
-                <label for="numColors">Number of colors:</label>
-                <input id="numColors" placeholder="Enter number of colors." type="number" min="1" max="10" required>
-                <button type="submit">Enter</button>
+    <div class="header-top">
+        <div class="header-title">~Color Coordination Generator~</div>
+    </div>
+    <?php include './header.html'; ?>
+</header>
+<main>
+    <div class="container">
+        <div class="formContainer">
+            <form id="coordinationForm">
+                <div class="form-group">
+                    <label for="numRowsAndCols">Number of rows and columns:</label>
+                    <input id="numRowsAndCols" placeholder="Enter number of rows and columns" type="number" min="1" max="26" required>
+                </div>
+                <div class="form-group">
+                    <label for="numColors">Number of colors:</label>
+                    <input id="numColors" placeholder="Enter number of colors." type="number" min="1" max="10" required>
+                </div>
+                <input type="submit" value="Submit">
             </form>
-            <div id="tableContainerUpper"></div>
-            <div id="tableContainerLower"></div>
+        </div>
+        <div id="tableContainerUpper"></div>
+        <div id="tableContainerLower"></div>
     </div>
 </main>
-    
     <script src="./src/javascript/color-coordination.js"></script>
     <footer>
         <?php include './footer.html'; ?>
