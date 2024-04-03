@@ -124,7 +124,7 @@ footer {
     z-index: 10;
 }
 
-footer p {
+footer > p {
     font-size: 12px; 
     color: white;
 }
