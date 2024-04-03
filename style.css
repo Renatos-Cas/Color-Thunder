@@ -119,12 +119,12 @@ footer {
     width: 100%;
     text-align: center;
     background-color: #05445e; 
-    position: relative; 
-    margin-top: 33.25%;
+    position: fixed; 
     bottom: 0;
+    z-index: 10;
 }
 
-footer > p {
+footer p {
     font-size: 12px; 
     color: white;
 }
