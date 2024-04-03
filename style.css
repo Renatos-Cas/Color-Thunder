@@ -13,7 +13,7 @@ header{
     z-index: 10;
     position: fixed;
     width: 100%;
-    height: 100px;
+    height: 8%;
 }
 .header-top {
     display: flex;
@@ -42,7 +42,7 @@ header{
     top: 0;
     left: 0;
     position: fixed;
-    height: 18%;
+    height: 16%;
     width: auto; 
 }
 
@@ -55,7 +55,8 @@ header{
 }
 
 .container {
-    margin-top: 180px;
+    padding-left: 1%;
+    padding-top: 11%;
     background-color: #E8F8F8;
 }
 
@@ -72,11 +73,6 @@ header{
 .member > image {
     height: 50px;
     width: 50px;
-}
-
-.header-icons i {
-    margin: 0 10px;
-    font-size: 20px;
 }
 
 
@@ -112,13 +108,6 @@ header{
 }
 
 
-.content-wrapper {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-    background: #E8F8F8;
-    flex: 1;
-}
 
 
 main p{
@@ -138,12 +127,10 @@ footer {
     bottom: 0;
   }
 
-.footer-text {
-    font-size: 12px;  
+footer > p {
+    font-size: 12px; 
+    color: white;
 }
-
-
-
 
 
 
