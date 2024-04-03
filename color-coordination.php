@@ -22,8 +22,8 @@
                 <input id="numColors" placeholder="Enter number of colors." type="number" min="1" max="10" required>
                 <button type="submit">Enter</button>
             </form>
-            <div id="tableContainer1"></div>
-            <div id="tableContainer2"></div>
+            <div id="tableContainerUpper"></div>
+            <div id="tableContainerLower"></div>
     </div>
 </main>
     
