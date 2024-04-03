@@ -9,17 +9,19 @@
 <body>
     <header>
         <div class="header-top">
-            <div class="header-title">~Color Thunder Home~</div>
+            <div class="header-title">~Color Thunder~</div>
         </div>
         <?php include './header.html'; ?>
     </header>
     <div class="container">
         <main>
-            <img src = '../src/hosp.jpg'>
-            <h1>UC Valley Perscription Portal</h1>
-            <p>Welcome to the UC Valley Hospital Portal, a comprehensive resource for patients, providers, and staff. Our portal offers easy access to medical records, appointment scheduling, and the latest health news and updates from UC Valley Hospital, ensuring the highest level of care and convenience for our community.</p>
-            <h2>Rx Policy</h2>
-            <p>At UC Valley Hospital, our prescription policy ensures the safe and effective use of medication for all patients. We follow strict guidelines for prescribing and dispensing medications, with a focus on accuracy, patient education, and adherence to the latest medical standards and regulations.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut   <!--!Change this-->
+                    labore et dolore magna aliqua. Sollicitudin nibh sit amet commodo nulla facilisi. Augue lacus
+                    viverra vitae congue eu consequat ac felis donec. Sem integer vitae justo eget magna fermentum 
+                    iaculis eu non. Dolor magna eget est lorem ipsum dolor sit. Sed sed risus pretium quam vulputate 
+                    dignissim suspendisse in est. Id leo in vitae turpis massa sed elementum tempus egestas. Non tellus
+                    orci ac auctor augue mauris augue neque gravida.
+            </p>
         </main>
       
     </div>
