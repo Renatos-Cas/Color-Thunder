@@ -9,23 +9,13 @@
 <body>
     <header>
         <div class="header-top">
-            <img src="../src/logo.png" alt="Logo" class="header-logo">
-            <div class="header-title">UC Valley Hospital Portal</div>
-            <div class="header-icons">
-                <i class="fas fa-cog"></i>
-                <i class="fas fa-user"></i>
-                <i class="fas fa-save"></i>
-            </div>
+            <div class="header-title">~Color Thunder~</div>
+            <img src="src/logo.png" alt="Logo" class="logo">
         </div>
         <nav class="header-nav">
-            <a href="home.html">Home</a>
-            <a href="patients.html">Patients</a>
-            <a href = "color-coordination.html">CCG</a> <!--!color cordinate generation tab-->
-            <a href="about.html">About</a> <!--about tab-->
-            <a href="#">Orders</a>
-            <a href="#">New Patients</a>
-            <a href="logs.html">Logs</a>
-            <a href="#">Settings</a>
+            <a href="home.html">Homepage</a>
+            <a href = "color-coordination.html">Color Coordinate Generation</a> <!--!color cordinate generation tab-->
+            <a class="active" href="about.html">About</a> <!--about tab-->
         </nav>
     </header>
     <main>
@@ -41,8 +31,7 @@
     </main>
     <script src="./src/javascript/color-coordination.js"></script>
     <footer>
-        <p>&copy; 2024 RxWiz, Inc. All rights reserved.</p>
-        <p>Contact us at info@rxwiz.com or call us at (555) 123-4567.</p>
+        <p>&copy; Made by CS312 Students.</p>
     </footer>
 </body>
 </html>

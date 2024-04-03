@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About</title>
-    <link rel="stylesheet" href="style_about.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header>
         <div class="header-top">
             <div class="header-title">~About Color Thunder~</div>
+            <img src="src/logo.png" alt="Logo" class="logo">
         </div>
         <nav class="header-nav">
             <a href="home.html">Homepage</a>
@@ -20,8 +21,6 @@
     </header>
 
     <div class="container">
-
-        <img src="src/logo.png" alt="Logo" class="logo">
 
         <div class="mission">
             <h3>Our Mission</h3>
