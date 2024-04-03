@@ -80,23 +80,19 @@
         <div class="member-info">
             <div class="blue-square">
                 <h2> Meet</h2>
-                <h1> [Name Here] </h1>              <!--!Change this-->
-                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut   <!--!Change this-->
-                    labore et dolore magna aliqua. Sollicitudin nibh sit amet commodo nulla facilisi. Augue lacus
-                    viverra vitae congue eu consequat ac felis donec. Sem integer vitae justo eget magna fermentum 
-                    iaculis eu non. Dolor magna eget est lorem ipsum dolor sit. Sed sed risus pretium quam vulputate 
-                    dignissim suspendisse in est. Id leo in vitae turpis massa sed elementum tempus egestas. Non tellus
-                    orci ac auctor augue mauris augue neque gravida. 
+                <h1> Caden Clark </h1>              <!--!Change this-->
+                <p> I am a junior at Colorado State University studying computer science with a concentration in networks and security.
+                    I have three cats and like to cook.
                 </p>
                 <h3>Contact: </h3>
                 <ul class="list">
-                    <li>Email: [Email here]</li>    <!--!Change this-->
-                    <li>Git: [Git here] </li>       <!--!Change this-->
-                    <li>Eid: [Eid Here] </li>       <!--!Change this-->
+                    <li>Email: caden147@colostate.edu </li>    <!--!Change this-->
+                    <li>Git: caden147 </li>       <!--!Change this-->
+                    <li>Eid: caden147 </li>       <!--!Change this-->
                 </ul>
             </div>
             <div class="overlapping-picture">
-                <img src="src/unknown.jpg" alt="Logo"> <!--!Change this-->
+                <img src="src/caden-pfp.jpg" alt="caden"> <!--!Change this-->
             </div>
         </div>
         
