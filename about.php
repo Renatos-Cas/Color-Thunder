@@ -4,27 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About</title>
-    <link rel="stylesheet" href="style_about.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+<script src="./src/javascript/fade_element_effect.js" defer></script>
     <header>
-        <div class="header-top">
-            <div class="header-title">~About Color Thunder~</div>
-        </div>
-        <nav class="header-nav">
-            <a href="home.html">Homepage</a>
-            <a href = "color-coordination.html">Color Coordinate Generation</a> <!--!color cordinate generation tab-->
-            <a class="active" href="about.html">About</a> <!--about tab-->
-        </nav>
-    </header>
+            <div class="header-top">
+                <div class="header-title">~About Color Thunder~</div>
+            </div>
+            <?php include './header.html'; ?>
+        </header>
 
     <div class="container">
 
-        <img src="src/logo.png" alt="Logo" class="logo">
+        
 
         <div class="mission">
-            <h3>Our Mission</h3>
             <h2>Why a Color Coordinate Generator Matters</h2>
             <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 
                 labore et dolore magna aliqua. Sollicitudin nibh sit amet commodo nulla facilisi. Augue lacus
@@ -41,6 +36,7 @@
         </div>
 
         <div class="member-info">
+           
             <div class="blue-square">
                 <h2> Meet </h2>
                 <h1> Rene Castillo </h1>
@@ -66,23 +62,18 @@
         <div class="member-info">
             <div class="blue-square">
                 <h2> Meet</h2>
-                <h1> [Name Here] </h1>              <!--!Change this-->
-                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut   <!--!Change this-->
-                    labore et dolore magna aliqua. Sollicitudin nibh sit amet commodo nulla facilisi. Augue lacus
-                    viverra vitae congue eu consequat ac felis donec. Sem integer vitae justo eget magna fermentum 
-                    iaculis eu non. Dolor magna eget est lorem ipsum dolor sit. Sed sed risus pretium quam vulputate 
-                    dignissim suspendisse in est. Id leo in vitae turpis massa sed elementum tempus egestas. Non tellus
-                    orci ac auctor augue mauris augue neque gravida. 
+                <h1> Calvin Mickelson </h1>              <!--!Change this-->
+                <p> Senior Comp sci major at csu. Has all 10 toes. 
                 </p>
                 <h3>Contact: </h3>
                 <ul class="list">
-                    <li>Email: [Email here]</li>    <!--!Change this-->
-                    <li>Git: [Git here] </li>       <!--!Change this-->
-                    <li>Eid: [Eid Here] </li>       <!--!Change this-->
+                    <li>Email: rollo@colostate.edu</li>    <!--!Change this-->
+                    <li>Git: cabbabbage </li>       <!--!Change this-->
+                    <li>Eid: rollo </li>       <!--!Change this-->
                 </ul>
             </div>
             <div class="overlapping-picture">
-                <img src="src/unknown.jpg" alt="Logo"> <!--!Change this-->
+                <img src="src/calvin_profile_pic.jpg" alt="calvin"> <!--!Change this-->
             </div>
         </div>
 
@@ -134,6 +125,6 @@
         
     </div>
     <footer>
-        <p>&copy; Made by CS312 Students.</p>
+        <?php include './footer.html'; ?>
     </footer>
 </body>
