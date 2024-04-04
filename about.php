@@ -7,18 +7,12 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<script src="./src/javascript/fade_element_effect.js" defer></script>
     <header>
-            <div class="header-top">
-                <div class="header-title">~About Color Thunder~</div>
-            </div>
-            <?php include './header.html'; ?>
-        </header>
+        <h1>~About Color Thunder~</h1>
+        <?php include './header.html'; ?>
+    </header>
 
     <div class="container">
-
-        
-
         <div class="mission">
             <h2>Why a Color Coordinate Generator Matters</h2>
             <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 

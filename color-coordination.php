@@ -8,9 +8,7 @@
 </head>
 <body>
 <header>
-    <div class="header-top">
-        <div class="header-title">~Color Coordination Generator~</div>
-    </div>
+    <h1>~Color Coordination Generator~</h1>
     <?php include './header.html'; ?>
 </header>
 <main>
