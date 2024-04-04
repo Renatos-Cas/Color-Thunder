@@ -8,9 +8,7 @@
 </head>
 <body>
     <header>
-        <div class="header-top">
-            <div class="header-title">~Color Thunder~</div>
-        </div>
+        <h1>~Color Thunder~</h1>
         <?php include './header.html'; ?>
     </header>
     <div class="container">

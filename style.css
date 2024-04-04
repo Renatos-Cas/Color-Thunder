@@ -7,58 +7,69 @@ body {
     flex-direction: column;
 }
 
-
-
-header{
-    z-index: 10;
-    position: fixed;
-    width: 100%;
-    height: 8%;
+.container {
+    padding-top: 200px;
 }
 
-.header-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    background-color: #05445e; 
-    height: 80px;
+    z-index: 10;
+}
+
+.nav-container {
+    background-color: #05445e;
+}
+
+.logo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 12%;
+}
+
+header h1 {
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+    margin: 0;
+    color: #fff;
+    background-color: #05445e;
+}
+
+.nav-container ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-align: center;
+}
+
+.nav-container ul li {
+    display: inline-block;
+}
+
+.nav-container ul li a {
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    background-color: #0f76a2;
+    margin: 5px;
+    padding: 10px 20px;
+    transition: all 0.3s ease 0s;
+}
+
+.nav-container ul li a:hover {
+    background-color: #09222F;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.30);
 }
 
 .fade-effect {
-    position: fixed;
-    top: 120px; 
-    width: 100%;
     height: 30px;
     background: linear-gradient(to bottom, #05445e 100%, #E8F8F8 100%);
-    z-index: 5;
-  }
-  
-  
-
-  
-
-.logo {
-    z-index: 6;
-    top: 0;
-    left: 0;
-    position: fixed;
-    height: 16%;
-    width: auto; 
-}
-
-.header-title {
-    flex-grow: 1;
-    text-align: center;
-    font-size: 50px; 
-    font-weight: bold;
-    color: #fff;
-}
-
-.container {
-    padding-left: 1%;
-    padding-top: 11%;
-    background-color: #E8F8F8;
 }
 
 .member {
@@ -76,43 +87,10 @@ header{
     width: 50px;
 }
 
-
-.header-nav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    background-color: #05445e;
-    height: 40px;   
-}
-
-.header-nav a {
-    z-index: 11;
-    padding-bottom: 100px;
-    margin: 0 10px;
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    font-size: 15px;
-    background-color: #0f76a2;
-    padding: 10px 20px;
-    transition: all 0.3s ease 0s;
-    margin-top: 20px;
-    margin-bottom: 10px;
-}
-
-.header-nav a:hover {
-    background-color: #09222F;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.30);
-}
-
-
-
-
-main p{
+main p {
     font-size: 20px;
     max-width: 100ch;  
-    word-wrap: break-word;  
+    word-wrap: break-word;
 }
 
 footer {
@@ -164,52 +142,6 @@ footer > p {
 }
 
 @media (max-width: 768px) {
-    body, html {
-        padding: 0;
-        margin: 0;
-    }
-
-    header, .header-top, .header-nav, .header-icons, .content-wrapper, main, .sidebar, .search-section, footer, .content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 0;
-        margin: 0;
-        width: 100%;
-    }
-    .header-icons i, .some-other-icon-container i {
-        display: none;  
-    }
-
-
-    .header-logo, .header-title, .header-nav a, main, .sidebar, .search-section, footer {
-        text-align: center;
-    }
-
-    .header-nav {
-        display: none;
-        justify-content: center;
-    }
-
-    .header-nav a {
-        display: block;
-        width: auto;
-        margin-bottom: 10px;  
-    }
-
-    .content-wrapper, main, .sidebar, .search-section {
-        padding: 10px;  
-    }
-
-    main, .sidebar, .search-section {
-        box-shadow: none;  
-    }
-
-    .search-section input, .search-section button {
-        width: 90%;  
-        margin: 10px auto;  
-    }
-
     table {
         display: block;
         overflow-x: auto;  
@@ -224,38 +156,6 @@ footer > p {
     th, td {
         padding: 8px;  
         border: 1px solid #ddd;  
-    }
-
-     
-    img {
-        max-width: 100%;  
-        height: auto;  
-    }
-
-     
-    .any-other-class {
-        align-content: center;
-        padding: 0 0;  
-        margin: 0 0;  
-        flex-direction: column;  
-        padding: 10px 0;  
-    }
-    main > * {
-        align-content: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;  
-        width: 100%;  
-        padding: 0 !important;  
-        margin: 0 !important;  
-    }
-    main .some-class {
-        display: flex;
-        flex-direction: column;
-        align-items: center;  
-        width: 100%;  
-        padding: 0 !important;  
-        margin: 0 !important;  
     }
 }
 
