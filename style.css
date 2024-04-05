@@ -5,6 +5,7 @@ body {
     font-family: 'Times New Roman', Times, serif;
     display: flex;
     flex-direction: column;
+
 }
 
 .container {
@@ -193,7 +194,7 @@ footer > p {
 
 .blue-square h3 {
     position: absolute;
-    margin-top: 380px ;
+    margin-top: 340px ;
     margin-left: 40px;
     color: white;
 }
@@ -228,7 +229,7 @@ footer > p {
 
 .list {
     position: absolute;
-    margin-top: 400px ;
+    margin-top: 370px ;
     margin-left: 40px;
 }
 
@@ -237,3 +238,56 @@ footer > p {
     margin-left: 40px;
     color: white;
 }
+
+
+.rotating-color-wheel {
+    position: absolute;
+    width: 850px;
+    height: 850px;
+    left: 50%;
+    top: -150px;
+    transform: translateX(-32%);
+    overflow: hidden;
+}
+  
+  .rotating-color-wheel img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    animation: rotation 50s infinite linear;
+  }
+  
+  .rotating-color-wheel .overlay {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, #E8F8F8 20%, rgba(255,255,255,0) 100%);
+  }
+  
+  @keyframes rotation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(359deg);
+    }
+  }
+  
+  .home h1 {
+    position: relative;
+    margin-top: -20px;
+    font-size: 70px; 
+    margin-bottom: -15px;
+    margin-right: 660px;
+    text-align: center;
+  }
+
+  .home p {
+    position: relative;
+    margin-top: 20px;
+    margin-bottom: -15px;
+    margin-right: 660px;
+    text-align: center;
+  }

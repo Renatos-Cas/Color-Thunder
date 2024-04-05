@@ -11,18 +11,27 @@
         <h1>~Color Thunder~</h1>
         <?php include './header.html'; ?>
     </header>
+
     <div class="container">
-        <main>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut   <!--!Change this-->
-                    labore et dolore magna aliqua. Sollicitudin nibh sit amet commodo nulla facilisi. Augue lacus
-                    viverra vitae congue eu consequat ac felis donec. Sem integer vitae justo eget magna fermentum 
-                    iaculis eu non. Dolor magna eget est lorem ipsum dolor sit. Sed sed risus pretium quam vulputate 
-                    dignissim suspendisse in est. Id leo in vitae turpis massa sed elementum tempus egestas. Non tellus
-                    orci ac auctor augue mauris augue neque gravida.
-            </p>
-        </main>
-      
+
+        <div class="rotating-color-wheel">
+            <img src="src/color-wheel-removebg.png" alt="Your Image">
+            <div class="overlay"></div>
+        </div>
+
+        <div class="home">
+            <h1>Experience</h1>
+            <h1>the Power</h1>
+            <h1>of Colors</h1>
+            <br>
+            <p> At Color Thunder, we believe that colors are the most important aspect of a website. </p>
+            <p> Let us help you reach your full potential.
+                Transform your visuals using our powerful color coordination generator tool - <strong>all for free! </strong></p>
+            <p>Say goodbye to ugliness and hello to stunning and inclusive designs.</p>
+        </div>    
+    
     </div>
+
     <footer>
         <?php include './footer.html'; ?>
     </footer>
