@@ -142,24 +142,6 @@ footer > p {
     background-color: #5168bc;
 }
 
-@media (max-width: 768px) {
-    table {
-        display: block;
-        overflow-x: auto;  
-    }
-
-    table, th, td {
-        width: auto;  
-        display: block;  
-        text-align: center;  
-    }
-
-    th, td {
-        padding: 8px;  
-        border: 1px solid #ddd;  
-    }
-}
-
 .mission {
     text-align: center;
     width: 50%;
@@ -291,3 +273,31 @@ footer > p {
     margin-right: 660px;
     text-align: center;
   }
+
+#tableContainerLower table {
+    margin: 0 auto;
+    margin-bottom: 100px;
+}
+
+#tableContainerLower table {
+    border: 1px solid;
+    border-collapse: collapse;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+#tableContainerLower td {
+    width: 5vw;
+    height: 5vw;
+    text-align: center;
+}
+
+#tableContainerLower tr:first-child, #tableContainerLower td:first-child {
+    background-color: #05445e;
+    color: #E8F8F8;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#tableContainerLower tr:not(:first-child) td:not(:first-child) {
+    border: 1px solid lightgrey;
+}
