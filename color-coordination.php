@@ -28,6 +28,7 @@
         </div>
         <div id="tableContainerUpper"></div>
         <div id="tableContainerLower"></div>
+        <input type="button" id="printViewButton" value="Print View">
     </div>
 </main>
     <script src="./src/javascript/color-coordination.js"></script>
