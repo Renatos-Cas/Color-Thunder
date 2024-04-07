@@ -125,20 +125,23 @@ footer > p {
 }
 
 .formContainer input[type="number"],
-.formContainer input[type="submit"] {
+.formContainer input[type="submit"],
+#printViewButton {
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
 }
 
-.formContainer input[type="submit"] {
+.formContainer input[type="submit"],
+#printViewButton {
     background-color: #05445e;
     border: none;
     cursor: pointer;
     color: white;
 }
 
-.formContainer input[type="submit"]:hover {
+.formContainer input[type="submit"]:hover,
+#printViewButton:hover {
     background-color: #5168bc;
 }
 
@@ -300,4 +303,8 @@ footer > p {
 
 #tableContainerLower tr:not(:first-child) td:not(:first-child) {
     border: 1px solid lightgrey;
+}
+
+#printViewButton {
+    display: none;
 }
