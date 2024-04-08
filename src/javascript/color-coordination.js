@@ -3,7 +3,7 @@ const numRowsAndColsWidget = document.getElementById("numRowsAndCols");
 const numColorsWidget = document.getElementById("numColors");
 const printViewButton = document.getElementById("printViewButton")
 const colorOptions = ['select', 'red', 'orange', 'yellow', 'green', 'blue', 'purple', 'grey', 'brown', 'black', 'teal'];
-let previousSelections = Array(colorOptions.length).fill(null);;
+let previousSelections = Array(colorOptions.length).fill(null);
 
 form.addEventListener("submit", handleSubmit);
 numRowsAndColsWidget.addEventListener("input", handleNumRowsAndColsInput);
@@ -68,6 +68,9 @@ function createTableUpper(numColors) {
         const defaultOption = document.createElement("option");
         defaultOption.value = 'select';
         defaultOption.textContent = 'Select a color';
+        defaultOption.disabled = true;
+        defaultOption.selected = true;
+
         dropdown.appendChild(defaultOption);
 
         colorOptions.forEach((color, index) => {
@@ -105,11 +108,13 @@ function handleSelection(index, dropdown, previousSelections, colorOptions, cont
         if (isColorTaken) {
             dropdown.value = 'select';
             dropdown.style.backgroundColor = "red";
-            contentCell.textContent = "";
+            contentCell.textContent = `${colorOptions[selectedIndex]} already chosen`;
+            contentCell.style.backgroundColor = "transparent";
         } else {
             previousSelections[index] = selectedIndex;
             dropdown.style.backgroundColor = "";
             contentCell.style.backgroundColor = selectedColor;
+            contentCell.textContent = "";
         }
     };
 }
@@ -218,6 +223,22 @@ function buildPrintViewHTML(upperTable, lowerTable) {
     `;
 }
 
+function getInvalidUpperTableTDs() {
+    return Array.from(document.querySelectorAll("#tableContainerUpper tr"))
+        .filter(tr => {
+            const tds = tr.querySelectorAll('td');
+            const select = tds[0].querySelector('select');
+            const color = tds[1];
+
+            if (select.value === 'select') {
+                select.style.backgroundColor = "red";
+                color.textContent = "Choose a color or adjust number of colors.";
+                return true;
+            }
+            return false;
+        });
+}
+
 function getUpperTableHTML() {
     const tds = Array.from(document.querySelectorAll("#tableContainerUpper tr td:first-child"))
     let upperTableHTML = '<table>';
@@ -231,6 +252,10 @@ function getLowerTableHTML() {
 }
 
 function printView() {
+    if (getInvalidUpperTableTDs().length > 0) {
+        return;
+    }
+
     const printViewHTML = buildPrintViewHTML(getUpperTableHTML(), getLowerTableHTML());
 
     const printViewWindow = window.open('', '_blank');
