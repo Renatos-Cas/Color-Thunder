@@ -280,17 +280,14 @@ footer > p {
 #tableContainerLower table {
     margin: 0 auto;
     margin-bottom: 100px;
-}
-
-#tableContainerLower table {
     border: 1px solid;
     border-collapse: collapse;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
 #tableContainerLower td {
-    width: 5vw;
-    height: 5vw;
+    width: 30px;
+    height: 30px;
     text-align: center;
 }
 

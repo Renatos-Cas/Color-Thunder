@@ -164,20 +164,21 @@ function getPreviewStyles() {
             height: 100px;
         }
         
+        #tableContainerLower {
+            page-break-inside: avoid;
+        }
+
         #tableContainerLower table {
             margin: 0 auto;
-            margin-bottom: 50px;
-        }
-        
-        #tableContainerLower table {
+            margin-bottom: 100px;
             border: 1px solid;
             border-collapse: collapse;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
         }
         
         #tableContainerLower td {
-            width: 5vw;
-            height: 5vw;
+            width: 30px;
+            height: 30px;
             text-align: center;
         }
         
@@ -190,6 +191,10 @@ function getPreviewStyles() {
         
         #tableContainerLower tr:not(:first-child) td:not(:first-child) {
             border: 1px solid lightgrey;
+        }
+
+        #tableContainerUpper table {
+            margin-bottom: 50px;
         }
     `;
 }
@@ -213,10 +218,21 @@ function buildPrintViewHTML(upperTable, lowerTable) {
     `;
 }
 
+function getUpperTableHTML() {
+    const tds = Array.from(document.querySelectorAll("#tableContainerUpper tr td:first-child"))
+    let upperTableHTML = '<table>';
+    tds.forEach(td => upperTableHTML += `<tr><td>${td.querySelector('select').value}</td></tr>`);
+    upperTableHTML += '</table>';
+    return upperTableHTML;
+}
+
+function getLowerTableHTML() {
+    return document.getElementById("tableContainerLower").innerHTML;
+}
+
 function printView() {
-    const upperTableHTML = document.getElementById("tableContainerUpper").innerHTML;
-    const lowerTableHTML = document.getElementById("tableContainerLower").innerHTML;
-    const printViewHTML = buildPrintViewHTML(upperTableHTML, lowerTableHTML);
+    const printViewHTML = buildPrintViewHTML(getUpperTableHTML(), getLowerTableHTML());
+
     const printViewWindow = window.open('', '_blank');
     printViewWindow.document.write(printViewHTML);
 
