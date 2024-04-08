@@ -109,7 +109,7 @@ function handleSelection(index, dropdown, previousSelections, colorOptions, cont
         } else {
             previousSelections[index] = selectedIndex;
             dropdown.style.backgroundColor = "";
-            contentCell.textContent = selectedColor;
+            contentCell.style.backgroundColor = selectedColor;
         }
     };
 }
