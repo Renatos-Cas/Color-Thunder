@@ -218,14 +218,21 @@ function buildPrintViewHTML(upperTable, lowerTable) {
     `;
 }
 
-function printView() {
+function getUpperTableHTML() {
     const tds = Array.from(document.querySelectorAll("#tableContainerUpper tr td:first-child"))
     let upperTableHTML = '<table>';
     tds.forEach(td => upperTableHTML += `<tr><td>${td.querySelector('select').value}</td></tr>`);
     upperTableHTML += '</table>';
+    return upperTableHTML;
+}
 
-    const lowerTableHTML = document.getElementById("tableContainerLower").innerHTML;
-    const printViewHTML = buildPrintViewHTML(upperTableHTML, lowerTableHTML);
+function getLowerTableHTML() {
+    return document.getElementById("tableContainerLower").innerHTML;
+}
+
+function printView() {
+    const printViewHTML = buildPrintViewHTML(getUpperTableHTML(), getLowerTableHTML());
+
     const printViewWindow = window.open('', '_blank');
     printViewWindow.document.write(printViewHTML);
 
