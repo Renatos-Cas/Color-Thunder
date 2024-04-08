@@ -213,7 +213,7 @@ function buildPrintViewHTML(upperTable, lowerTable) {
         </head>
         <body>
             <header>
-                <img src="/src/logo.png" alt="Greyscale Logo">
+                <img src="./src/logo.png" alt="Greyscale Logo">
                 <h1>Color Thunder</h1>
             </header>
             <div id="tableContainerUpper">${upperTable}</div>
