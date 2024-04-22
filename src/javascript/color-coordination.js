@@ -266,7 +266,7 @@ function printView() {
         setTimeout(function() {
             printViewWindow.document.close();
             printViewWindow.focus();
-            printViewWindow.print();
+            printViewWindow.print(); // we aren't actually printing it, dont open print page. 
             printViewWindow.close();
         }, 200);
       }
