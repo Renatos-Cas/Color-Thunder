@@ -69,14 +69,26 @@
         $conn->close();
     ?> 
 
-    <div class="add-color">
-        <p>add color exists!</p>
+<div class="add-color">
+        <p>Add a new color:</p>
+        <form>
+            <label for="color-name">Color Name:</label><br>
+            <input type="text" id="color-name" name="color-name" maxlength="10"><br>
+            <label for="hex-value">Hex Value:</label><br>
+            <input type="text" id="hex-value" name="hex-value" maxlength="6"><br>
+            <input type="submit" value="Submit">
+        </form>
     </div>
     <div class="edit-color">
         <p>edit color exists!</p>
     </div>
     <div class="delete-color">
-        <p>delete color exists!</p>
+        <p>Delete a color:</p>
+        <form>
+            <label for="color-hex">Color Name or Hex Value:</label><br>
+            <input type="search" id="color-hex" name="color-hex" maxlength="10"><br>
+            <input type="submit" value="Submit">
+        </form>
     </div>
 </main>
 

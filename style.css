@@ -353,3 +353,11 @@ footer > p {
     margin-top: 15%;
     margin-left: 5%;
 }
+
+.selection-interfaces {
+    background-color: #05445e;
+    margin-right: 10%;
+    color: white;
+    padding: 20px;
+    padding-top: 10px;
+}
