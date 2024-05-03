@@ -1,21 +1,13 @@
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && $_POST['action'] === 'delete') {
-    $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
-    
-    if ($id) {
-        $sql = $conn->prepare("DELETE FROM colors WHERE id = ?");
-        $sql->bind_param("i", $id);
-        
-        if ($sql->execute()) {
-            header("Location: color-selection.php");
-            exit();
+    if (isset($_POST['id']) && is_numeric($_POST['id'])) {
+        $colorId = $_POST['id'];
+        $result = deleteColorById($conn, $colorId);
+        if ($result) {
+            echo "Color deleted successfully.";
         } else {
             echo "Error deleting color.";
         }
     } else {
         echo "Invalid color ID.";
     }
-} else {
-    echo "Invalid request.";
-}
 ?>

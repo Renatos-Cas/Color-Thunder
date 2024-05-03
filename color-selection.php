@@ -18,7 +18,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action'])) {
             break;
     }
 }
-$colors = fetchColors($conn);
 ?>
 
 <!DOCTYPE html>
@@ -39,21 +38,22 @@ $colors = fetchColors($conn);
     <?php include './add-color.php'; ?>
 
     <?php
-    if (!empty($colors)) {
-        echo "<ul>";
-        foreach ($colors as $color) {
-            echo "<li>" . $color['colorName'] . "
-              <form method='POST' action='".$_SERVER['PHP_SELF']."'>
-                  <input type='hidden' name='id' value='".$color['id']."'>
-                  <input type='hidden' name='action' value='delete'>
-                  <input type='submit' value='Delete'>
-              </form>
-              </li>";
+        $colors = fetchColors($conn);
+        if (!empty($colors)) {
+            echo "<ul>";
+            foreach ($colors as $color) {
+                echo "<li>" . $color['colorName'] . "
+                <form method='POST' action='".$_SERVER['PHP_SELF']."'>
+                    <input type='hidden' name='id' value='".$color['id']."'>
+                    <input type='hidden' name='action' value='delete'>
+                    <input type='submit' value='Delete'>
+                </form>
+                </li>";
+            }
+            echo "</ul>";
+        } else {
+            echo "No colors found.";
         }
-        echo "</ul>";
-    } else {
-        echo "No colors found.";
-    }
     ?>
 </main>
 
