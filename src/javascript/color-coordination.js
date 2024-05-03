@@ -1,19 +1,26 @@
 const form = document.getElementById("coordinationForm");
 const numRowsAndColsWidget = document.getElementById("numRowsAndCols");
 const numColorsWidget = document.getElementById("numColors");
-const printViewButton = document.getElementById("printViewButton")
+const printViewButton = document.getElementById("printViewButton");
 const colorOptions = ['select', 'red', 'orange', 'yellow', 'green', 'blue', 'purple', 'grey', 'brown', 'black', 'teal'];
 let previousSelections = Array(colorOptions.length).fill(null);
+let current_color = null; 
 
 form.addEventListener("submit", handleSubmit);
 numRowsAndColsWidget.addEventListener("input", handleNumRowsAndColsInput);
 numColorsWidget.addEventListener("input", handleNumColorsInput);
 printViewButton.addEventListener("click", printView);
 
-let numRowsAndCols;
-let numColors;
-let numRowsAndColsValid = false;
-let colorsValid = false;
+function getCurrentColor() {
+    const radioButtons = document.querySelectorAll('#tableContainerUpper input[type="radio"]');
+    for (let i = 0; i < radioButtons.length; i++) {
+        if (radioButtons[i].checked) {
+            const row = radioButtons[i].closest('tr');
+            return row;
+        }
+    }
+    return null;
+}
 
 function handleSubmit(event) {
     event.preventDefault();
@@ -64,6 +71,8 @@ function createTableUpper(numColors) {
     for (let i = 0; i < numColors; i++) {
         const row = document.createElement("tr");
         const colorCell = document.createElement("td");
+        
+
         const dropdown = document.createElement("select");
         const defaultOption = document.createElement("option");
         defaultOption.value = 'select';
@@ -82,11 +91,19 @@ function createTableUpper(numColors) {
             }
         });
 
+        const currentColorCell = document.createElement("td");
+        const currentColorRadioButton = document.createElement("input");
+        currentColorRadioButton.type = "radio";
+        currentColorRadioButton.name = "currentColorSelection";
+        currentColorCell.appendChild(currentColorRadioButton);
+        
         const contentCell = document.createElement("td");
         dropdown.onchange = handleSelection(i, dropdown, previousSelections, colorOptions, contentCell);
+        
         colorCell.appendChild(dropdown);
         row.appendChild(colorCell);
         row.appendChild(contentCell);
+        row.appendChild(currentColorCell);
         table.appendChild(row);
     }
 
@@ -95,30 +112,48 @@ function createTableUpper(numColors) {
 
 function handleSelection(index, dropdown, previousSelections, colorOptions, contentCell) {
     return function() {
+        contentCell.textContent=''
         const selectedColor = dropdown.value;
         if (selectedColor === 'select') {
             contentCell.textContent = "";
             dropdown.style.backgroundColor = "";
+            previousSelections[index] = null;
+            contentCell.style.backgroundColor = "transparent";
             return;
         }
 
         const selectedIndex = dropdown.selectedIndex;
         const isColorTaken = previousSelections.some((colorIndex, idx) => colorIndex === selectedIndex && idx !== index);
-        
+
         if (isColorTaken) {
             dropdown.value = 'select';
             dropdown.style.backgroundColor = "red";
             contentCell.textContent = `${colorOptions[selectedIndex]} already chosen`;
-            contentCell.style.backgroundColor = "transparent";
         } else {
+            if (previousSelections[index] !== null) {
+                updateColorsInLowerTable(previousSelections[index], selectedIndex, contentCell);
+            }
             previousSelections[index] = selectedIndex;
-            dropdown.style.backgroundColor = "";
+            dropdown.style.backgroundColor = selectedColor;
             contentCell.style.backgroundColor = selectedColor;
-            contentCell.textContent = "";
         }
     };
 }
 
+
+
+
+function updateColorsInLowerTable(oldColorIndex, newColorIndex, contentCell) {
+    const oldColor = colorOptions[oldColorIndex];
+    const newColor = colorOptions[newColorIndex];
+    const cells = document.querySelectorAll('#tableContainerLower td');
+    cells.forEach(cell => {
+        if (cell.style.backgroundColor === oldColor) {
+            cell.style.backgroundColor = newColor;
+            appendCoordinateToContentCell(cell.id, contentCell);
+        }
+    });
+}
 
 function createTableLower(numRows) {
     const tableContainer = document.getElementById("tableContainerLower");
@@ -126,19 +161,17 @@ function createTableLower(numRows) {
     const rows = Number(numRows) + 1;
     const cols = Number(numRows) + 1;
     const table = document.createElement("table");
+
     for (let i = 0; i < rows; i++) {
         const row = document.createElement("tr");
         for (let j = 0; j < cols; j++) {
             const cell = document.createElement("td");
-            if (i === 0 && j === 0) {
-                cell.textContent = "";
-            } else if (i === 0) {
-                cell.textContent = String.fromCharCode('A'.charCodeAt(0) + j - 1);
-            } else if (j === 0) {
-                cell.textContent = i.toString();
-            } else {
-                cell.textContent = "";
-            }
+
+                        if (i === 0 && j === 0) {
+                cell.textContent = "";             } else if (i === 0) {
+                cell.textContent = String.fromCharCode('A'.charCodeAt(0) + j - 1);             } else if (j === 0) {
+                cell.textContent = i.toString();             } else {
+                cell.textContent = "";                 cell.id = String.fromCharCode('A'.charCodeAt(0) + j - 1) + i;                 cell.onclick = function() { handleCellClick(cell); };             }
             row.appendChild(cell);
         }
         table.appendChild(row);
@@ -146,6 +179,64 @@ function createTableLower(numRows) {
 
     tableContainer.appendChild(table);
 }
+
+
+function handleCellClick(cell) {
+    const row = getCurrentColor();
+    if (!row) {
+        console.log("No color selected");
+        alert('Please select a color first.');
+        return;
+    }
+    
+    const selectElement = row.querySelector('select');
+    const newColor = selectElement.value;
+    const oldColor = window.getComputedStyle(cell).backgroundColor;     const contentCell = row.cells[row.cells.length - 2];
+
+        if (cell.style.backgroundColor === newColor) {
+        cell.style.backgroundColor = 'transparent';         removeCoordinateFromContentCell(cell.id, contentCell);     } else {
+        if (cell.style.backgroundColor !== newColor && cell.style.backgroundColor !== '') {
+            removeCoordinateFromOldRow(cell.id, oldColor); 
+        }
+        cell.style.backgroundColor = newColor;         appendCoordinateToContentCell(cell.id, contentCell);     }
+}
+
+function appendCoordinateToContentCell(coordinate, contentCell) {
+    let coordinates = contentCell.textContent ? contentCell.textContent.split(', ') : [];
+    if (coordinate && !coordinates.includes(coordinate)) {
+        coordinates.push(coordinate);
+        coordinates.sort((a, b) => {
+            const aParts = a.match(/(\D+)(\d+)/);
+            const bParts = b.match(/(\D+)(\d+)/);
+            if (aParts[1] === bParts[1]) return parseInt(aParts[2]) - parseInt(bParts[2]);
+            return aParts[1].localeCompare(bParts[1]);
+        });
+        contentCell.textContent = coordinates.join(', ');
+    }
+}
+
+function removeCoordinateFromContentCell(coordinate, contentCell) {
+    let coordinates = contentCell.textContent ? contentCell.textContent.split(', ') : [];
+    const index = coordinates.indexOf(coordinate);
+    if (index > -1) {
+        coordinates.splice(index, 1);
+        contentCell.textContent = coordinates.join(', ');
+    }
+}
+
+function removeCoordinateFromOldRow(coordinate, oldColor) {
+    const rows = document.querySelectorAll('#tableContainerUpper tr');
+    rows.forEach(row => {
+        const contentCell = row.cells[row.cells.length - 2];
+        if (window.getComputedStyle(contentCell).backgroundColor === oldColor) {
+            removeCoordinateFromContentCell(coordinate, contentCell);
+        }
+    });
+}
+
+
+
+
 
 
 function getPreviewStyles() {
@@ -262,11 +353,10 @@ function printView() {
     printViewWindow.document.write(printViewHTML);
 
     if (Boolean(printViewWindow.chrome)) {
-        // delay for chrome
-        setTimeout(function() {
+                setTimeout(function() {
             printViewWindow.document.close();
             printViewWindow.focus();
-            printViewWindow.print(); // we aren't actually printing it, dont open print page. 
+            printViewWindow.print(); 
             printViewWindow.close();
         }, 200);
       }
