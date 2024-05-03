@@ -2,9 +2,7 @@
 require_once 'db-connect.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action'])) {
-    $action = $_POST['action'];
-
-    switch ($action) {
+    switch ($_POST['action']) {
         case 'add':
             require_once 'add-color.php';
             break;
