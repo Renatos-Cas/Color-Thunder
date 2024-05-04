@@ -1,3 +1,23 @@
+<?php
+require_once 'db-connect.php';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action'])) {
+    switch ($_POST['action']) {
+        case 'add':
+            require_once 'add-color.php';
+            break;
+        case 'edit':
+            require_once 'edit-color.php';
+            break;
+        case 'delete':
+            require_once 'delete-color.php';
+            break;
+        default:
+            break;
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,87 +32,29 @@
     <?php include './header.html'; ?>
 </header>
 
-
-
 <main class="selection-interfaces">
+    <?php include './add-color.php'; ?>
+
     <?php
-        include ".db-login.php";
-
-        $conn = new mysqli($servername, $username, $password, $db);
-        if ($conn->connect_error) {
-            echo "<p>Bad connection</p>";
-        } else {
-            echo "<p>Successfully connected to database.</p>";
-        }
-
-        $sql = "CREATE TABLE colors (
-            id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-            colorName VARCHAR(30) UNIQUE NOT NULL,
-            hexValue VARCHAR(30) UNIQUE NOT NULL
-            )";
-
-        if ($conn->query($sql) === TRUE) {
-            echo "Table colors created successfully\n";
-        } else {
-            echo "Error creating table: " . $conn->error;
-        }
-
-        $sql = "INSERT INTO colors (colorName, hexValue)
-        VALUES ('green', '00FF00')";
-
-        if ($conn->query($sql) === TRUE) {
-            echo "New record created successfully\n";
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
-        }
-
-        $sql = "SELECT * FROM colors";
-        $result = $conn->query($sql);
-
-        if ($result->num_rows > 0) {
-            // output data of each row
-            while($row = $result->fetch_assoc()) {
-                echo "<br>id: " . $row["id"]. " - Name: " . $row["colorName"]. " - Hex Value: " . $row["hexValue"]. "<br>";
+        $colors = fetchColors($conn);
+        if (!empty($colors)) {
+            echo "<ul>";
+            foreach ($colors as $color) {
+                echo "<li>" . $color['colorName'] . "
+                <form method='POST' action='".$_SERVER['PHP_SELF']."'>
+                    <input type='hidden' name='id' value='".$color['id']."'>
+                    <input type='hidden' name='action' value='delete'>
+                    <input type='submit' value='Delete'>
+                </form>
+                </li>";
             }
+            echo "</ul>";
         } else {
-            echo "0 results";
+            echo "No colors found.";
         }
-
-        $sql = "DROP TABLE colors";
-
-        if ($conn->query($sql) === TRUE) {
-            echo "Table deleted successfully\n";
-        } else {
-            echo "Error deleting table: " . $conn->error;
-        }
-
-        $conn->close();
-    ?> 
-
-<div class="add-color">
-        <p>Add a new color:</p>
-        <form>
-            <label for="color-name">Color Name:</label><br>
-            <input type="text" id="color-name" name="color-name" maxlength="10"><br>
-            <label for="hex-value">Hex Value:</label><br>
-            <input type="text" id="hex-value" name="hex-value" maxlength="6"><br>
-            <input type="submit" value="Submit">
-        </form>
-    </div>
-    <div class="edit-color">
-        <p>edit color exists!</p>
-    </div>
-    <div class="delete-color">
-        <p>Delete a color:</p>
-        <form>
-            <label for="color-hex">Color Name or Hex Value:</label><br>
-            <input type="search" id="color-hex" name="color-hex" maxlength="10"><br>
-            <input type="submit" value="Submit">
-        </form>
-    </div>
+    ?>
 </main>
 
-<script src="./src/javascript/color-selection.js"></script>
 <footer>
     <?php include './footer.html'; ?>
 </footer>
