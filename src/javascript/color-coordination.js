@@ -2,7 +2,7 @@ const form = document.getElementById("coordinationForm");
 const numRowsAndColsWidget = document.getElementById("numRowsAndCols");
 const numColorsWidget = document.getElementById("numColors");
 const printViewButton = document.getElementById("printViewButton");
-const colorOptions = ['select', 'red', 'orange', 'yellow', 'green', 'blue', 'purple', 'grey', 'brown', 'black', 'teal'];
+let colorOptions = [];
 let previousSelections = Array(colorOptions.length).fill(null);
 let current_color = null; 
 
@@ -68,46 +68,44 @@ function createTableUpper(numColors) {
     const tableContainer = document.getElementById("tableContainerUpper");
     tableContainer.innerHTML = "";
     const table = document.createElement("table");    
-    for (let i = 0; i < numColors; i++) {
-        const row = document.createElement("tr");
-        const colorCell = document.createElement("td");
-        
+    fetch('get-colors.php')
+      .then(response => response.json())
+      .then(colors => {
+        for (let i = 0; i < numColors; i++) {
+            const row = document.createElement("tr");
+            const colorCell = document.createElement("td");
+            
+            const dropdown = document.createElement("select");
+            const defaultOption = document.createElement("option");
+            defaultOption.value = 'select';
+            defaultOption.textContent = 'Select a color';
+            defaultOption.disabled = true;
+            defaultOption.selected = true;
 
-        const dropdown = document.createElement("select");
-        const defaultOption = document.createElement("option");
-        defaultOption.value = 'select';
-        defaultOption.textContent = 'Select a color';
-        defaultOption.disabled = true;
-        defaultOption.selected = true;
-
-        dropdown.appendChild(defaultOption);
-
-        colorOptions.forEach((color, index) => {
-            if (color !== 'select') {
+            dropdown.appendChild(defaultOption);
+            colors.forEach(color => {
                 const option = document.createElement("option");
-                option.value = color;
-                option.textContent = color;
+                option.value = color.colorName;
+                option.textContent = color.colorName;
                 dropdown.appendChild(option);
-            }
-        });
+              });
 
-        const currentColorCell = document.createElement("td");
-        const currentColorRadioButton = document.createElement("input");
-        currentColorRadioButton.type = "radio";
-        currentColorRadioButton.name = "currentColorSelection";
-        currentColorCell.appendChild(currentColorRadioButton);
-        
-        const contentCell = document.createElement("td");
-        dropdown.onchange = handleSelection(i, dropdown, previousSelections, colorOptions, contentCell);
-        
-        colorCell.appendChild(dropdown);
-        row.appendChild(colorCell);
-        row.appendChild(contentCell);
-        row.appendChild(currentColorCell);
-        table.appendChild(row);
-    }
-
-    tableContainer.appendChild(table);
+            const currentColorCell = document.createElement("td");
+            const currentColorRadioButton = document.createElement("input");
+            currentColorRadioButton.type = "radio";
+            currentColorRadioButton.name = "currentColorSelection";
+            currentColorCell.appendChild(currentColorRadioButton);
+            
+            const contentCell = document.createElement("td");
+            dropdown.onchange = handleSelection(i, dropdown, previousSelections, colors, contentCell);
+            colorCell.appendChild(dropdown);
+            row.appendChild(colorCell);
+            row.appendChild(contentCell);
+            row.appendChild(currentColorCell);
+            table.appendChild(row);
+        }
+        tableContainer.appendChild(table);
+      });
 }
 
 function handleSelection(index, dropdown, previousSelections, colorOptions, contentCell) {
@@ -121,14 +119,13 @@ function handleSelection(index, dropdown, previousSelections, colorOptions, cont
             contentCell.style.backgroundColor = "transparent";
             return;
         }
-
         const selectedIndex = dropdown.selectedIndex;
         const isColorTaken = previousSelections.some((colorIndex, idx) => colorIndex === selectedIndex && idx !== index);
 
         if (isColorTaken) {
             dropdown.value = 'select';
             dropdown.style.backgroundColor = "red";
-            contentCell.textContent = `${colorOptions[selectedIndex]} already chosen`;
+            contentCell.textContent = `${selectedColor} already chosen`;
         } else {
             if (previousSelections[index] !== null) {
                 updateColorsInLowerTable(previousSelections[index], selectedIndex, contentCell);
@@ -139,9 +136,6 @@ function handleSelection(index, dropdown, previousSelections, colorOptions, cont
         }
     };
 }
-
-
-
 
 function updateColorsInLowerTable(oldColorIndex, newColorIndex, contentCell) {
     const oldColor = colorOptions[oldColorIndex];
@@ -330,16 +324,58 @@ function getInvalidUpperTableTDs() {
         });
 }
 
+let colorToHex = {};
+
+fetch('get-colors.php')
+  .then(response => response.json())
+  .then(colors => {
+    colors.forEach(color => {
+      colorToHex[color.colorName] = color.hexValue;
+    });
+  });
+
 function getUpperTableHTML() {
-    const tds = Array.from(document.querySelectorAll("#tableContainerUpper tr td:first-child"))
-    let upperTableHTML = '<table>';
-    tds.forEach(td => upperTableHTML += `<tr><td>${td.querySelector('select').value}</td></tr>`);
-    upperTableHTML += '</table>';
-    return upperTableHTML;
+  const rows = Array.from(document.querySelectorAll("#tableContainerUpper tr"));
+  let upperTableHTML = '<table>';
+  rows.forEach(row => {
+    const colorCell = row.querySelector('td:first-child select').value;
+    const hexCode = colorToHex[colorCell];
+    const cellsToColor = row.querySelector('td:nth-child(2)').textContent;
+    upperTableHTML += `<tr><td>${colorCell} (${hexCode})</td><td>${cellsToColor}</td></tr>`;
+  });
+  upperTableHTML += '</table>';
+  return upperTableHTML;
 }
 
+
 function getLowerTableHTML() {
-    return document.getElementById("tableContainerLower").innerHTML;
+    const table = document.createElement("table");
+    const rows = document.querySelectorAll("#tableContainerLower tr");
+
+    rows.forEach((row, i) => {
+        const newRow = document.createElement("tr");
+        const cells = row.querySelectorAll("td");
+
+        cells.forEach((cell, j) => {
+            const newCell = document.createElement("td");
+
+            if (i === 0 && j === 0) {
+                newCell.textContent = "";
+            } else if (i === 0) {
+                newCell.textContent = String.fromCharCode('A'.charCodeAt(0) + j - 1);
+            } else if (j === 0) {
+                newCell.textContent = i.toString();
+            } else {
+                newCell.textContent = "";
+            }
+
+            newRow.appendChild(newCell);
+        });
+
+        table.appendChild(newRow);
+    });
+
+    return table.outerHTML;
 }
 
 function printView() {
@@ -349,21 +385,17 @@ function printView() {
 
     const printViewHTML = buildPrintViewHTML(getUpperTableHTML(), getLowerTableHTML());
 
-    const printViewWindow = window.open('', '_blank');
-    printViewWindow.document.write(printViewHTML);
-
-    if (Boolean(printViewWindow.chrome)) {
-                setTimeout(function() {
-            printViewWindow.document.close();
-            printViewWindow.focus();
-            printViewWindow.print(); 
-            printViewWindow.close();
-        }, 200);
-      }
-      else {
+    fetch('print_page.php', {
+        method: 'POST',
+        body: printViewHTML
+    }).then(response => {
+        if (response.ok) {
+            return response.text();
+        }
+    }).then(data => {
+        const printViewWindow = window.open('', '_blank');
+        printViewWindow.document.write(data);
         printViewWindow.document.close();
         printViewWindow.focus();
-        printViewWindow.print();
-        printViewWindow.close();
-      }
+    });
 }
