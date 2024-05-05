@@ -1,15 +1,39 @@
 const form = document.getElementById("coordinationForm");
 const numRowsAndColsWidget = document.getElementById("numRowsAndCols");
-const numColorsWidget = document.getElementById("numColors");
 const printViewButton = document.getElementById("printViewButton");
+
+
 let colorOptions = [];
-let previousSelections = Array(colorOptions.length).fill(null);
-let current_color = null; 
+let colorNames = [];
+let previousSelections = [];  
+let current_color = null;
+let numColorsWidget = []
 
 form.addEventListener("submit", handleSubmit);
 numRowsAndColsWidget.addEventListener("input", handleNumRowsAndColsInput);
-numColorsWidget.addEventListener("input", handleNumColorsInput);
 printViewButton.addEventListener("click", printView);
+
+fetch('get_color.php')
+  .then(response => {
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then(colors => {
+
+    colorOptions = colors.map(color => [color.hexValue]);
+    colorNames = colors.map(color => [color.colorName]);
+    numColorsWidget = colorOptions.length
+
+
+    previousSelections = Array(colorOptions.length).fill(null);
+
+    console.log('Updated color options:', colorOptions);
+  })
+  .catch(error => {
+    console.error('Error fetching colors:', error);
+  });
 
 function getCurrentColor() {
     const radioButtons = document.querySelectorAll('#tableContainerUpper input[type="radio"]');
@@ -25,7 +49,7 @@ function getCurrentColor() {
 function handleSubmit(event) {
     event.preventDefault();
     const numRowsAndCols = numRowsAndColsWidget.value;
-    const numColors = numColorsWidget.value;
+    const numColors = colorOptions.length;
     createTableUpper(numColors);
     createTableLower(numRowsAndCols);
     previousSelections = Array(colorOptions.length).fill(null);
@@ -47,14 +71,16 @@ function handleNumRowsAndColsInput(event) {
 function handleNumColorsInput(event) {
     const { value } = event.target;
 
-    if (value < 1 || value > 10) {
+    if (value < 1) {
         setInvalidStyle(numColorsWidget);
         colorsValid = false;
+        alert("You must first select your colors at the color selection page.");
     } else {
         setValidStyle(numColorsWidget);
         colorsValid = true;
     }
 }
+
 
 function setValidStyle(element) {
     element.style.backgroundColor = "white";
@@ -68,44 +94,46 @@ function createTableUpper(numColors) {
     const tableContainer = document.getElementById("tableContainerUpper");
     tableContainer.innerHTML = "";
     const table = document.createElement("table");    
-    fetch('get-colors.php')
-      .then(response => response.json())
-      .then(colors => {
-        for (let i = 0; i < numColors; i++) {
-            const row = document.createElement("tr");
-            const colorCell = document.createElement("td");
-            
-            const dropdown = document.createElement("select");
-            const defaultOption = document.createElement("option");
-            defaultOption.value = 'select';
-            defaultOption.textContent = 'Select a color';
-            defaultOption.disabled = true;
-            defaultOption.selected = true;
+    for (let i = 0; i < numColors; i++) {
+        const row = document.createElement("tr");
+        const colorCell = document.createElement("td");
+        
 
-            dropdown.appendChild(defaultOption);
-            colors.forEach(color => {
+        const dropdown = document.createElement("select");
+        const defaultOption = document.createElement("option");
+        defaultOption.value = 'select';
+        defaultOption.textContent = 'Select a color';
+        defaultOption.disabled = true;
+        defaultOption.selected = true;
+
+        dropdown.appendChild(defaultOption);
+
+        colorNames.forEach((color, index) => {
+            if (color !== 'select') {
                 const option = document.createElement("option");
-                option.value = color.colorName;
-                option.textContent = color.colorName;
+                option.value = color;
+                option.textContent = color;
                 dropdown.appendChild(option);
-              });
+            }
+        });
 
-            const currentColorCell = document.createElement("td");
-            const currentColorRadioButton = document.createElement("input");
-            currentColorRadioButton.type = "radio";
-            currentColorRadioButton.name = "currentColorSelection";
-            currentColorCell.appendChild(currentColorRadioButton);
-            
-            const contentCell = document.createElement("td");
-            dropdown.onchange = handleSelection(i, dropdown, previousSelections, colors, contentCell);
-            colorCell.appendChild(dropdown);
-            row.appendChild(colorCell);
-            row.appendChild(contentCell);
-            row.appendChild(currentColorCell);
-            table.appendChild(row);
-        }
-        tableContainer.appendChild(table);
-      });
+        const currentColorCell = document.createElement("td");
+        const currentColorRadioButton = document.createElement("input");
+        currentColorRadioButton.type = "radio";
+        currentColorRadioButton.name = "currentColorSelection";
+        currentColorCell.appendChild(currentColorRadioButton);
+        
+        const contentCell = document.createElement("td");
+        dropdown.onchange = handleSelection(i, dropdown, previousSelections, colorOptions, contentCell);
+        
+        colorCell.appendChild(dropdown);
+        row.appendChild(colorCell);
+        row.appendChild(contentCell);
+        row.appendChild(currentColorCell);
+        table.appendChild(row);
+    }
+
+    tableContainer.appendChild(table);
 }
 
 function handleSelection(index, dropdown, previousSelections, colorOptions, contentCell) {
@@ -326,13 +354,7 @@ function getInvalidUpperTableTDs() {
 
 let colorToHex = {};
 
-fetch('get-colors.php')
-  .then(response => response.json())
-  .then(colors => {
-    colors.forEach(color => {
-      colorToHex[color.colorName] = color.hexValue;
-    });
-  });
+
 
 function getUpperTableHTML() {
   const rows = Array.from(document.querySelectorAll("#tableContainerUpper tr"));
