@@ -1,4 +1,6 @@
 <?php
+    require_once 'db-connect.php';
+
     if (isset($_POST['color-name']) && isset($_POST['color'])) {
         $colorName = $_POST['color-name'];
         $hexValue = $_POST['color'];  // Capture the value from the color picker
