@@ -41,12 +41,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action'])) {
             echo "<ul>";
             foreach ($colors as $color) {
                 echo "<li>" . $color['colorName'] . "
-                <form method='POST' action='".$_SERVER['PHP_SELF']."'>
-                    <input type='hidden' name='id' value='".$color['id']."'>
-                    <input type='hidden' name='action' value='delete'>
-                    <input type='submit' value='Delete'>
-                </form>
-                </li>";
+                    <form method='POST' action='".$_SERVER['PHP_SELF']."' class='edit-form'>
+                        <input type='hidden' name='id' value='".$color['id']."'>
+                        <input type='hidden' name='action' value='edit'>
+                        <input type='submit' value='Edit'>
+                    </form>
+                    <div class='edit-color-form'>
+                        <form method='POST' action='edit-color.php' style='display: none;'>
+                            <input type='hidden' name='id' value='".$color['id']."'>
+                            <input type='hidden' name='action' value='edit'>
+                            New Name: <input type='text' name='new_name' required><br>
+                            New Hex Value: <input type='text' name='new_hex_value' required><br>
+                            <input type='submit' value='Save Changes'>
+                        </form>
+                    </div>
+                    </li>";
             }
             echo "</ul>";
         } else {
@@ -58,5 +67,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action'])) {
 <footer>
     <?php include './footer.html'; ?>
 </footer>
+<script>
+    // JavaScript to toggle display of edit color form
+    const editForms = document.querySelectorAll('.edit-form');
+    editForms.forEach(form => {
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+            const editColorForm = form.nextElementSibling.querySelector('form');
+            editColorForm.style.display = 'block';
+            this.style.display = 'none';
+        });
+    });
+</script>
 </body>
 </html>
