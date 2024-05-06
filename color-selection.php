@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action'])) {
                             <input type='hidden' name='id' value='".$color['id']."'>
                             <input type='hidden' name='action' value='edit'>
                             New Name: <input type='text' name='new_name' required><br>
-                            New Hex Value: <input type='text' name='new_hex_value' required><br>
+                            <input type='color' id='color' name='new_hex_value' value='#ffffff'><br>
                             <input type='submit' value='Save Changes'>
                             <button type='button' class='cancel'>Cancel</button>
                         </form>
