@@ -19,10 +19,6 @@
                     <label for="numRowsAndCols">Number of rows and columns:</label>
                     <input id="numRowsAndCols" placeholder="Enter number of rows and columns" type="number" min="1" max="26" required>
                 </div>
-                <div class="form-group">
-                    <label for="numColors">Number of colors:</label>
-                    <input id="numColors" placeholder="Enter number of colors." type="number" min="1" max="10" required>
-                </div>
                 <input type="submit" value="Submit">
             </form>
         </div>
