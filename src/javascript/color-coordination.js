@@ -1,7 +1,7 @@
 const form = document.getElementById("coordinationForm");
 const numRowsAndColsWidget = document.getElementById("numRowsAndCols");
 const printViewButton = document.getElementById("printViewButton");
-
+let click_color;
 
 let colorOptions = [];
 let colorNames = [];
@@ -40,6 +40,9 @@ function getCurrentColor() {
     for (let i = 0; i < radioButtons.length; i++) {
         if (radioButtons[i].checked) {
             const row = radioButtons[i].closest('tr');
+  
+            const cell  = row.cells[1];
+            click_color = cell.style.backgroundColor;
             return row;
         }
     }
@@ -138,6 +141,7 @@ function createTableUpper(numColors) {
 
 function handleSelection(index, dropdown, previousSelections, colorOptions, contentCell) {
     return function() {
+        cColor = contentCell.style.backgroundColor;
         contentCell.textContent=''
         const selectedColor = dropdown.value;
         if (selectedColor === 'select') {
@@ -155,19 +159,19 @@ function handleSelection(index, dropdown, previousSelections, colorOptions, cont
             dropdown.style.backgroundColor = "red";
             contentCell.textContent = `${selectedColor} already chosen`;
         } else {
+            nColor = colorOptions[selectedIndex -1]
             if (previousSelections[index] !== null) {
-                updateColorsInLowerTable(previousSelections[index], selectedIndex, contentCell);
+                updateColorsInLowerTable(cColor, nColor, contentCell);
             }
+
             previousSelections[index] = selectedIndex;
-            dropdown.style.backgroundColor = selectedColor;
-            contentCell.style.backgroundColor = selectedColor;
+            dropdown.style.backgroundColor = nColor;
+            contentCell.style.backgroundColor = nColor;
         }
     };
 }
 
-function updateColorsInLowerTable(oldColorIndex, newColorIndex, contentCell) {
-    const oldColor = colorOptions[oldColorIndex];
-    const newColor = colorOptions[newColorIndex];
+function updateColorsInLowerTable(oldColor, newColor, contentCell) {
     const cells = document.querySelectorAll('#tableContainerLower td');
     cells.forEach(cell => {
         if (cell.style.backgroundColor === oldColor) {
@@ -211,9 +215,8 @@ function handleCellClick(cell) {
         return;
     }
     
-    const selectElement = row.querySelector('select');
-    const newColor = selectElement.value;
-    const oldColor = window.getComputedStyle(cell).backgroundColor;     const contentCell = row.cells[row.cells.length - 2];
+    const newColor = click_color;
+    const oldColor = cell.style.backgroundColor;     const contentCell = row.cells[row.cells.length - 2];
 
         if (cell.style.backgroundColor === newColor) {
         cell.style.backgroundColor = 'transparent';         removeCoordinateFromContentCell(cell.id, contentCell);     } else {
